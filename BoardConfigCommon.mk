@@ -24,7 +24,6 @@ AB_OTA_PARTITIONS += \
     system_dlkm \
     system_ext \
     vendor \
-    vendor_boot \
     vendor_dlkm
 
 # SoC Arch (64bit only)
