@@ -23,7 +23,7 @@ ENABLE_AB := true
 ENABLE_VIRTUAL_AB := true
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/android_u_baseline.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/android_t_baseline.mk)
 
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := gz
 
@@ -53,7 +53,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 TARGET_COMMON_QTI_COMPONENTS := \
     adreno \
     alarm \
-    audio \
     av \
     bt \
     charging \
@@ -69,6 +68,17 @@ TARGET_COMMON_QTI_COMPONENTS := \
 
 TARGET_USE_AIDL_QTI_BT_AUDIO := true
 TARGET_USE_AIDL_QTI_HEALTH := true
+
+# Audio configs (global)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_pineapple_cdp_wsa883x.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_pineapple_cdp_wsa883x.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_pineapple_cdp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_pineapple_cdp.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_pineapple_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_pineapple_mtp.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_pineapple_qrd_sku2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_pineapple_qrd_sku2.xml \
+    $(LOCAL_PATH)/configs/audio/resourcemanager_pineapple_cdp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_pineapple_cdp.xml \
+    $(LOCAL_PATH)/configs/audio/resourcemanager_pineapple_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_pineapple_mtp.xml \
+    $(LOCAL_PATH)/configs/audio/resourcemanager_pineapple_qrd_sku2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_pineapple_qrd_sku2.xml \
+    $(LOCAL_PATH)/configs/audio/resourcemanager_pineapple_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_pineapple_qrd.xml
 
 # ANT+
 PRODUCT_PACKAGES += \
@@ -163,6 +173,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.health-service.qti \
     android.hardware.health@1.0 \
+    android.hardware.health-V1-ndk.vendor \
     android.hardware.health@2.1 \
     android.hardware.health-service.qti_recovery
 
@@ -232,6 +243,10 @@ PRODUCT_COPY_FILES += \
 # Netd
 PRODUCT_PACKGES += \
     android.system.net.netd-V1-ndk.vendor
+
+# Network
+PRODUCT_PACKAGES += \
+    android.hardware.tetheroffload-V1-ndk.vendor
 
 # Neural Networks
 PRODUCT_PACKAGES += \
